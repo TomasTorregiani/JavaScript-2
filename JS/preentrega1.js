@@ -2,7 +2,7 @@
 //Quiz de los simpsons
 
 function btnSaludar(nombre){
-    alert (`Bienvenido ${nombre} al Simpsons quiz!`)
+    alert (`Bienvenido ${nombre.toUpperCase()} al Simpsons quiz!`)
 }
 
 
@@ -59,70 +59,8 @@ function btnJugar(){
 }
 
 btnSaludar(prompt(`Ingrese su nombre`));
-btnJugar(); 
+btnJugar();  
 
-
-// E-Commerce  --------------------------------- NO ME SALIOOOOOOOO ---------------------------
-
-let productos = " " 
-
-let ingresar = prompt (`Bienvenido, quiere ingresar al sitio a comprar? 
-SI/NO`)
-
-while (ingresar ==="SI"){
-    let producto = prompt(`Seleccione el producto que quiera comprar
-                            (pantalones/remeras/buzos)`)
-    switch (producto){
-        case "pantalones": alert (`ud quiere pantalones`)
-        let marcaPantalones = prompt (`Seleccione la marca: Adidas/nike`)
-            switch (marcaPantalones) {
-                case "adidas": 
-                const TALLE_PANTALON = prompt (`Ingrese el talle: S/M/L`)                                         
-                switch (TALLE_PANTALON){
-                    case "s": 
-                    const CANTIDAD_PANTALON = parseInt(prompt(`Ingrese la cantidad`)) 
-                    alert (`Ud quiere comprar: ${CANTIDAD_PANTALON} pantalones, marca ${marcaPantalones}`) 
-                    break
-                    case "m":
-                    CANTIDAD_PANTALON = parseInt(prompt(`Ingrese la cantidad`)) 
-                    alert (`Ud quiere comprar: ${CANTIDAD_PANTALON} pantalones, marca ${marcaPantalones}`)  
-                    break
-                    case "l":          
-                    CANTIDAD_PANTALON = parseInt(prompt(`Ingrese la cantidad`)) 
-                    alert (`Ud quiere comprar: ${CANTIDAD_PANTALON} pantalones, marca ${marcaPantalones}`)  
-                    break
-                    default: alert(`Ingrese un talle`) 
-                    break             
-                case "nike":   
-                TALLE_PANTALON = prompt (`Ingrese el talle: S/M/L`)
-                switch (TALLE_PANTALON){
-                    case "s": 
-                    const CANTIDAD_PANTALON = parseInt(prompt(`Ingrese la cantidad`)) 
-                    alert (`Ud quiere comprar: ${CANTIDAD_PANTALON} pantalones, marca ${marcaPantalones}`) 
-                    break
-                    case "m":
-                    CANTIDAD_PANTALON = parseInt(prompt(`Ingrese la cantidad`)) 
-                    alert (`Ud quiere comprar: ${CANTIDAD_PANTALON} pantalones, marca ${marcaPantalones}`)  
-                    break
-                    case "l":          
-                    CANTIDAD_PANTALON = parseInt(prompt(`Ingrese la cantidad`)) 
-                    alert (`Ud quiere comprar: ${CANTIDAD_PANTALON} pantalones, marca ${marcaPantalones}`)  
-                    break
-                    default: alert(`Ingrese un talle`) 
-                    break 
-                default: alert(`Seleccione una marca`)   
-                break         
-                }
-                default: alert("Seleccione un producto")
-                break
-                
-                }
-        break
-        case "remeras": alert (`Ud quiere remeras`)
-        default: alert(`bla`)
-            }
-    }    
-} 
 
 // Turnos Medicos
 let turnoTraumatologo = 0
@@ -155,7 +93,7 @@ let bienvenido = prompt (`Bienvenido a la web para turnos medicos
         btnTurnos()
     } else {
         alert(`Lo esperamos prontoS`)
-    } 
+    }  
 
 
 // App pedido comidas
@@ -211,9 +149,19 @@ function ingresar (direccion, nombre) {
                                 break
         }             
     } bienvenido = prompt(`${nombre}, Desea seguir comprando? SI/NO`)
-    } let confirmarDireccion = prompt(`${nombre}, la direccion "${direccion} es correcta? SI/NO`)
-        if (confirmarDireccion === "SI"){
-            alert (`Ya preparamos su pedido`)
+    }   
+    alert (`Cafe expresso: ${cantidadExpresso}`);
+    alert (`Facturas: ${cantidadFact}`);
+    alert(`Flat white; ${cantidadFlat}`);
+    alert(`Sanguches: ${cantidadSang}`);
+    alert(`Torta: ${cantidadTorta}`);
+    alert(`Cafe Latte: ${cantidadLatte}`); 
+        let confirmarDireccion = prompt(`${nombre}, la direccion "${direccion} es correcta? SI/NO`)
+        if (confirmarDireccion.toLocaleUpperCase() === "SI"){
+            alert (`Gracias! ya preparamos su pedido, sera enviado a ${direccion}`)
+        } else {
+            let nuevaDireccion = prompt (`Ingrese su direccion`)
+            alert (`Gracias! ya preparamos su pedido, sera enviado a ${nuevaDireccion}`)
         }
     } 
     
@@ -226,5 +174,8 @@ ingresar (prompt(`Ingrese su direccion`), prompt(`Ingrese su nombre`));
     console.log(`Flat white; ${cantidadFlat}`);
     console.log(`Sanguches: ${cantidadSang}`);
     console.log(`Torta: ${cantidadTorta}`);
-    console.log(`Cafe Latte: ${cantidadLatte}`);
+    console.log(`Cafe Latte: ${cantidadLatte}`);  
+
+
+
 
