@@ -1,5 +1,26 @@
 .card{
-    width: 350px;
-    height: 350px;
-    
+    width: 300px;
+    align-items: center;
+    display: flex;
+    margin: 0.5rem;
+}
+.caja {
+    border: 2px blue solid;
+    background-color: aqua;
+}
+
+.dark-mode{
+    background-color: rgb(109, 22, 22);
+    color: white ;
+}
+
+.lista{
+    background-color: lightcoral;
+}
+
+.imgProducto{
+    width: 249px;
+    height: 200px;
+    object-fit: contain;
+    margin-top: 1rem;
 }

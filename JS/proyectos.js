@@ -259,121 +259,289 @@ let parrafo = document.createElement("p")
 parrafo.textContent = "Este parrafo lo cree desde JS"
 document.body.appendChild(parrafo)   */
 
-// ------------------------------- DOM ----------------------------------------------
-/* let arrayComida = [];
-let arrayCafe = [];
 
-let header = document.createElement("div")
-header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary">
-<div class="container-fluid">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-</div>
-</nav>`
+// CLASE 10 ************************************* EVENTOS *******************************************************
 
-    divHeader.appendChild(header)
+// Eventos son la manera que tenemos de controlar en JS las acciones de usuarios y definir un comportamiento
+// Existen 3 formas de realizar la escucha de un evento. La 3er forma es mala practica, asi que no se usa
 
-class Producto{
-    constructor (producto,precio,stock, img){
-        this.producto = producto
-        this.precio = precio
-        this.stock = stock
-        this.img = img
+//1er manera
+
+/* const BTN = document.getElementById ("btn") 
+BTN.addEventListener('click', ()=> {
+    alert(`Hiciste click`);
+}) 
+
+
+const EVENTOS = document.createElement("div")
+EVENTOS.innerHTML = "Clase 10 - eventos (creado desde JS)"
+divHeader.appendChild(EVENTOS)  */
+
+//2da manera - utilizamos las propiedades del nodo
+
+/* BTN.onclick = () => {alert(`Hiciste clickasasdada`)}  */
+
+//3er manera - se escribe la funcion directamente en el html
+
+/* function eventoEnHtml() {
+    alert (`Esta es la tercer manera`)
+} */
+
+const CAJA = document.querySelector("#btn")
+CAJA.onmousedown = ()=> {
+    console.log(`esta pasando el mouse sobre la caja`); 
+} 
+
+const CAMPO_TEXTO = document.querySelector("#campoTexto")
+
+CAMPO_TEXTO.onkeydown = () => {
+    console.log(`Tecla abajo`);
+} 
+CAMPO_TEXTO.onkeyup = ()=> {
+    console.log(`Tecla arriba`);
+} 
+
+CAMPO_TEXTO.addEventListener("change", ()=> {
+    console.log(`Valor cambiado: ${CAMPO_TEXTO.value}`);
+}) 
+
+CAMPO_TEXTO.addEventListener("input", ()=> {
+    console.log(CAMPO_TEXTO.value);
+}) 
+
+// EVENTO SUBMIT ==> SE ACTIVA CUANDO UN FORMULARIO ES ENVIADO
+
+class Cliente{
+    constructor(nombre, apellido){
+        this.nombre = nombre
+        this.apellido = apellido
     }
 }
 
-const FACTURA = new Producto ("factura", 500, 75, "https://saborargento.com.ar/wp-content/uploads/2023/06/Receta-de-Medialunas-de-Grasa.jpg");
-arrayComida.push(FACTURA)
+const ARRAY_CLIENTES = []
 
-const CHIPA = new Producto ("chipa", 450, 50, "https://www.rionegro.com.ar/wp-content/uploads/2020/01/Chip%C3%A1.jpg");
-arrayComida.push(CHIPA)
+const FORMULARIO = document.querySelector("#formulario")
 
-const SANDWICH_MIGA = new Producto ("sandwich de miga", 580, 28, "https://www.clarin.com/img/2021/08/06/M4wbnpEIC_720x0__1.jpg");
-arrayComida.push(SANDWICH_MIGA)
+FORMULARIO.addEventListener("submit", (e)=> {
+e.preventDefault()
+    const NOMBRE = document.getElementById("nombre")
+    const APELLIDO = document.getElementById("apellido")
 
-const CROISSANT = new Producto ("croissant", 850, 36, "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/2018_01_Croissant_IMG_0685.JPG/800px-2018_01_Croissant_IMG_0685.JPG");
-arrayComida.push(CROISSANT)
+    console.log(`El nombre ingresado es ${NOMBRE.value} 
+    y el apellido es ${APELLIDO.value}`); 
 
-const TORTA = new Producto("torta", 1250, 10, "https://d2r9epyceweg5n.cloudfront.net/stores/002/903/404/products/foto-tortas-web-1024x1024-031-c98248d6d1c7ffc2ef16778710656406-1024-1024.png");
-arrayComida.push(TORTA)
+    const cliente1 = new Cliente (NOMBRE.value, APELLIDO.value)
 
-const ROLL_DE_CANELA = new Producto("roll de canela",1000, 47,"https://cdn0.recetasgratis.net/es/posts/6/5/6/rollos_de_canela_faciles_23656_orig.jpg");
-arrayComida.push(ROLL_DE_CANELA)
+    ARRAY_CLIENTES.push (cliente1)
 
-console.log(arrayComida);
+    FORMULARIO.reset()
+
+    console.log(ARRAY_CLIENTES);
+})
+
+// CLASE 11 ------------------- STORAGE & JASON ------------------------------
+
+// LocalStorage ==> los datos se van a almacenar de manera indefinida
+
+/* SessionStorage ==> los datos se almacenan de forma temporal. 
+Una vez que se cierra la pantalla se pierden los datos. Los datos van a 
+estar disponibles mientras dura le sesion */
+
+//setItem ==> es un metodo que proporciona el objeto local storage.
+//De esta manera almacenamos los datos de manera local
+
+localStorage.setItem("saludo", "Hola chicos!")
+
+localStorage.setItem("Despedida", "Chau chicos")
+
+//getItems ==> Es un metodo por el cual recuperamos valores almacenados en el local navegador   
+
+let valor = localStorage.getItem("saludo")
+console.log(valor);
+
+localStorage.setItem("Numero", 123);
+let numero = localStorage.getItem("Numero")
+
+console.log(typeof "numero");
+
+let numeroComoNumero = parseInt(numero)
+console.log(typeof numeroComoNumero);
+
+//SessionStorage funciona similar a localStorage
+
+/* sessionStorage.setItem ("nombre", "Tomas") */
 
 
-const FLAT_WHITE = new Producto("flat white", 1250, 25, "https://www.nespresso.com/coffee-blog/sites/default/files/2022-06/09_img_940x740_0.jpg")
-arrayCafe.push(FLAT_WHITE)
+//removeItem ==> Metodo que nos permite eliminar un elemento
 
-const AMERICANO = new Producto("americano", 1000, 36, "https://cdn.recetasderechupete.com/wp-content/uploads/2023/11/Cafe-americano-portada.jpg")
-arrayCafe.push(AMERICANO)
+localStorage.setItem("eliminar", "frase a eliminar")
+localStorage.removeItem("eliminar")
 
-const ESPRESSO = new Producto("espresso", 750, 54, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQswGLta-a0xViixEqTIbKz0hzp_atz1SaXWw&usqp=CAU")
-arrayCafe.push(ESPRESSO)
+//clear() ==> limina de manera global todos los datos almacenados
+/* localStorage.clear() */
 
-const LUNGO = new Producto("lungo", 850, 34, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFiuL87X8UHn0R33IN_whlOE-QpI57MUTw0A&usqp=CAU")
-arrayCafe.push(LUNGO)
+//Recorremos el localStorage
 
-const CAPUCCINO = new Producto("capuccino", 1450, 25, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9i8cDhZRIh0RCh_IDe331iP-hf7lJr9b0bQ&usqp=CAU")
-arrayCafe.push(CAPUCCINO)
+localStorage.setItem("nombre", "juan")
+localStorage.setItem("edad", "25")
+localStorage.setItem("ciudad", "mar del plata")
 
-console.log(arrayCafe);
+//Obtener todas las claves almacenadas en el localStorage
 
-arrayComida.forEach(producto => {
-    let divComida = document.createElement("div")
+let todasLasClaves = Object.keys(localStorage)
 
-    divComida.innerHTML = `
-                                <div class="card" style="width: 18rem;">
-                                <img src="${producto.img}" width='250px' height='250px' alt="...">
-                                <div class="card-body">
-                                <h5 class="card-title">${producto.producto.toUpperCase()}</h5>
-                                <p class="card-text">$${producto.precio}.</p>
-                                <a href="#" class="btn btn-primary">COMPRAR<a>                         
-                                </div>                         
-                            </div>`
-                    contenedorProductosComida.appendChild(divComida)
+for(let i = 0; i < todasLasClaves.length; i++){
+    let clave = todasLasClaves[i]
+    let valor = localStorage.getItem(clave)
+
+    console.log(clave, valor);
+
+}
+
+
+//****************************JSON***************************************
+
+//JavaScript object notation. Es un formato de intercambio de datos
+
+/* let persona = {nombre: "Juan", edad: 25, ciudad: "Mar del Plata"} */
+
+
+//stringify -==> es una funcion que convierte cualquier objeto en una cadena Json
+
+/* let jsonPersona = JSON.stringify(persona)
+
+console.log(jsonPersona); */
+
+/* localStorage.setItem("nombreJS", "maxiJS")
+
+const PERSONAJS = localStorage.getItem("nombreJS")
+
+const PERSONA = JSON.parse (PERSONAJS)
+console.log(PERSONA, typeof PERSONA); */
+
+//Modo oscuro - modo claro
+
+/* const BOTON_MODO = document.getElementById("botonModo")
+
+BOTON_MODO.addEventListener("click", ()=> {
+    document.body.classList.toggle("dark")
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("modo", "dark")
+
+    } else{
+        localStorage.setItem("modo", "claro")
+    }
+}) */
+
+// GENERANDO UN CARRITO DE COMPRAS
+
+class Producto {
+    constructor (nombre, precio){
+    this.nombre = nombre 
+    this.precio = precio
+    }
+}
+
+
+const product1 = new Producto ("camisa", 500)
+const product2 = new Producto ("jean", 300)
+const product3 = new Producto ("remera", 400)
+
+const carrito = []
+
+carrito.push(product1)
+carrito.push(product2)
+carrito.push(product3)
+
+console.log(carrito);
+
+const carritoJSON = JSON.stringify(carrito) //==> esto es para almacenar el carrito en el storage
+
+localStorage.setItem("carrito", carritoJSON)
+
+const carritoRecuperado = localStorage.getItem("carrito")
+
+const carritoObjeto = JSON.parse(carritoRecuperado)
+
+const contenedorCarrito = document.querySelector("#contenedorCarrito")
+
+carritoObjeto.forEach(producto => {
+    contenedorCarrito.innerHTML += `
+    <p>${producto.nombre} - ${producto.precio}</p>`
+    
 });
 
-arrayCafe.forEach(producto => {
-    let divCafe = document.createElement("div")
-    divCafe.innerHTML = `<div class="card" style="width: 18rem;">
-                            <img src="${producto.img}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">${producto.producto.toUpperCase()}</h5>
-                            <p class="card-text">$${producto.precio}.</p>
-                            <a href="#" class="btn btn-primary">COMPRAR</a>
-                            </div>
-                        </div>`
-                    contenedorProductosCafe.appendChild(divCafe)
-}); */
+// Pre-entrega II -------------------------------------------------
+
+//*******************************************  App pedido comidas  *********************************************
+
+/* let cantidadFact = 0
+let cantidadTorta = 0
+let cantidadSang = 0
+
+let cantidadExpresso = 0
+let cantidadFlat = 0
+let cantidadLatte = 0
+
+let arrayComida =[  {id:1, producto: "FACTURA", precio: 500, stock: 100},
+                    {id:2, producto: "CHIPA", precio: 500, stock: 88},
+                    {id:3, producto: "SANDWWICH DE MIGA", precio: 500, stock: 65},
+                    {id:4, producto: "CROISSANT", precio: 500, stock: 50},
+                    {id:5, producto: "TORTA", precio: 500, stock: 95},
+                    {id:6, producto: "ROLL DE CANELA", precio: 500, stock: 46},
+                ]
+
+let arrayCafe = [   {id:1, producto: "FLAT WHITE", precio: 1500, stock: 100},
+                    {id:1, producto: "AMERICANO", precio: 1500, stock: 50},
+                    {id:1, producto: "ESPRESSO", precio: 1500, stock: 64},
+                    {id:1, producto: "LUNGO", precio: 1500, stock: 79},
+                    {id:1, producto: "CAPUCCINO", precio: 1500, stock: 42}
+                ]
+
+class Cliente{
+    constructor(nombre, direccion){
+        this.nombre = nombre
+        this.direccion = direccion
+        this.pedido = 0
+        this.gustoComida = ""
+        
+    }
+
+    buscarProducto(gusto){
+                if (gusto.toLowerCase() === "comida") {
+                    return arrayComida.find((comida) => comida.producto.includes(this.gustoComida))
+                } else {
+                    return arrayCafe.find ((cafe) => cafe.producto.includes(this.gustoComida))
+                }
+    }
+
+    ingresar() {
+        let bienvenido = ""
+        while (bienvenido.toUpperCase() === "SI"){
+                let gusto = ""
+                    if (gusto.toLowerCase() === "comida"){
+                    this.gustoComida = ""
+                    } else {
+                    this.gustoComida = ""
+                    }
+                    let comidaSeleccionada = this.buscarProducto(gusto)
+                    
+                    let cantidad = ""
+                    let precioTotal = comidaSeleccionada.precio * parseInt(cantidad)
+                    comidaSeleccionada.stock -= cantidad 
+                    carrito.push({producto: comidaSeleccionada.producto, precio: precioTotal, cantidad: cantidad})    
+                    
+                    bienvenido = ""
+        } 
+        
+        alert (`Tu compra es ${carrito.map((producto,i) => `${i+1}. ${producto.cantidad} ${producto.producto}`)},
+        Sera enviado a la direccion: ${this.direccion}`) */
+        /* alert (`Por un total de ${carrito.reduce((acumulador, precio) =>acumulador + precio.precio, 0)}`) *///* no me sale el reduce() */
+        /*   console.log(carrito); */
+       /*  alert (`Vuelva prontos`)  */
+  /*       }      
+            
+    } */
+
+/* const CLIENTE1 = new Cliente (prompt(`ingrese nombre`), prompt(`ingrese direccion`)) */
+/* CLIENTE1.ingresar()   */
