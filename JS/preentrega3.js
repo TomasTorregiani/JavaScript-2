@@ -1,5 +1,16 @@
 
-let arrayProductos = [];
+setTimeout(()=>{
+  Swal.fire({
+    title: "Bienvenido a la tienda de Birra",
+    text: "Una fría no se le niega a nadie.",
+    imageUrl: "https://topbeer.mx/wp-content/uploads/2022/08/tipos-de-cerveza-en-beer-flight-1024x683.jpg",
+    imageWidth: 400,
+    imageHeight: 300,
+    imageAlt: "Custom image"
+  });
+}, 1000)
+
+
 const obj = JSON.parse(localStorage.getItem("carrito"))
 
 let carrito = obj || [] 
@@ -8,7 +19,7 @@ console.log(`carrito: ${carrito}`);
 let header = document.createElement("div")
 header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary">
 <div class="container-fluid">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#"><img class="navBarImg" src="https://www.diarioconvos.com/wp-content/uploads/2024/01/cerveza-artesanal-828x548.jpg" alt=""></a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -22,18 +33,16 @@ header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary">
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown
+          Cervezas
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><a class="dropdown-item" href="#">Rubia</a></li>
+          <li><a class="dropdown-item" href="#">Roja</a></li>
+          
+          <li><a class="dropdown-item" href="#">Negra</a></li>
         </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-      </li>
+      
     </ul>
     <form class="d-flex" role="search" id="alerta-form">
       <input class="form-control me-2" type="text" id="alerta-input" placeholder="Search" aria-label="Search">
@@ -45,91 +54,67 @@ header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary">
 
     divHeader.appendChild(header)
 
-    class Producto{
-      constructor (producto,precio,stock, img){
-          this.producto = producto
-          this.precio = precio
-          this.stock = stock
-          this.img = img
+const urlUsuarios = "https://api.punkapi.com/v2/beers"
+
+let arrayProductos = [];
+
+const getBeers = () => fetch(urlUsuarios)
+  .then(response => response.json())
+  .then(data => arrayProductos = data )
+  .catch(e => console.log(e))          
+
+  const renderCards = async (filteredProduct) => {
+    await getBeers() 
+    const arrayToUse = filteredProduct || arrayProductos
+    arrayToUse.map(producto => {
+      producto = {
+        ...producto,
+        price: Math.floor((Math.random()*500))+1500
       }
-  }
-  
-  const FACTURA = new Producto ("factura", 500, 75, "https://saborargento.com.ar/wp-content/uploads/2023/06/Receta-de-Medialunas-de-Grasa.jpg");
-  arrayProductos.push(FACTURA)
-  
-  const CHIPA = new Producto ("chipa", 450, 50, "https://www.rionegro.com.ar/wp-content/uploads/2020/01/Chip%C3%A1.jpg");
-  arrayProductos.push(CHIPA)
-  
-  const SANDWICH_MIGA = new Producto ("sandwich de miga", 580, 28, "https://www.clarin.com/img/2021/08/06/M4wbnpEIC_720x0__1.jpg");
-  arrayProductos.push(SANDWICH_MIGA)
-  
-  const CROISSANT = new Producto ("croissant", 850, 36, "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/2018_01_Croissant_IMG_0685.JPG/800px-2018_01_Croissant_IMG_0685.JPG");
-  arrayProductos.push(CROISSANT)
-  
-  const TORTA = new Producto("torta", 1250, 10, "https://d2r9epyceweg5n.cloudfront.net/stores/002/903/404/products/foto-tortas-web-1024x1024-031-c98248d6d1c7ffc2ef16778710656406-1024-1024.png");
-  arrayProductos.push(TORTA)
-  
-  const ROLL_DE_CANELA = new Producto("roll de canela",1000, 47,"https://cdn0.recetasgratis.net/es/posts/6/5/6/rollos_de_canela_faciles_23656_orig.jpg");
-  arrayProductos.push(ROLL_DE_CANELA)
-  
-  
-  const FLAT_WHITE = new Producto("flat white", 1250, 25, "https://www.nespresso.com/coffee-blog/sites/default/files/2022-06/09_img_940x740_0.jpg")
-  arrayProductos.push(FLAT_WHITE)
-  
-  const AMERICANO = new Producto("americano", 1000, 36, "https://cdn.recetasderechupete.com/wp-content/uploads/2023/11/Cafe-americano-portada.jpg")
-  arrayProductos.push(AMERICANO)
-  
-  const ESPRESSO = new Producto("espresso", 750, 54, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQswGLta-a0xViixEqTIbKz0hzp_atz1SaXWw&usqp=CAU")
-  arrayProductos.push(ESPRESSO)
-  
-  const LUNGO = new Producto("lungo", 850, 34, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFiuL87X8UHn0R33IN_whlOE-QpI57MUTw0A&usqp=CAU")
-  arrayProductos.push(LUNGO)
-  
-  const CAPUCCINO = new Producto("capuccino", 1450, 25, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9i8cDhZRIh0RCh_IDe331iP-hf7lJr9b0bQ&usqp=CAU")
-  arrayProductos.push(CAPUCCINO)
-  
-
-
-  function renderCards(array) {
-    array.forEach(producto => {
-      
       let divComida = document.createElement("div")
-      divComida.classList.add("col-xl-3", "col-md-6", "col-sm-12")
-      divComida.innerHTML = `
-                                  <div class="card" ;">
-                                  <img src="${producto.img}"  alt="..." class="imgProducto">
+      divComida.classList.add("col-xl-3", "col-md-6", "col-sm-12")   
+      divComida.innerHTML =  `
+                                  <div class="card">
+                                  <img src="${producto.image_url}"  alt="..." class="imgProducto"> 
                                   <div class="card-body">
-                                  <h5 class="card-title">${producto.producto.toUpperCase()}</h5>
-                                  <p class="card-text">$${producto.precio}.</p>
-                                  <input type="number" value="0" min="0" id="input-${producto.producto}">
+                                  <h5 class="card-title">${producto.name.toUpperCase()}</h5>
+                                  <p class="card-text">$${producto.price}.</p>
+                                  <input type="number" value="1" min="0" id="input-${producto.id}">
                                   
-                                  <a href="#" class="btn btn-primary" id="buttonCompra-${producto.producto}">AGREGAR PRODUCTO<a>                         
+                                  <button class="btn btn-primary" id="buttonCompra-${producto.id}">AGREGAR PRODUCTO</button>                         
                                   </div>                         
-                              </div>`
+                              </div>` 
+                              
                       contenedorProductos.appendChild(divComida)
 
-                      let compraButton = document.getElementById(`buttonCompra-${producto.producto}`)
-                      let input = document.getElementById(`input-${producto.producto}`)
-  
+                      let compraButton = document.getElementById(`buttonCompra-${producto.id}`)
                       compraButton.addEventListener("click", ()=> {                                          
-                      carrito.push({producto: producto.producto, precio: producto.precio, cantidad: input.value, img: producto.img})
+                      carrito.push(producto)
                       localStorage.setItem("carrito", JSON.stringify(carrito))
+                      Toastify({
+                        text: "Producto Agregado",
+                        className: "info",
+                        duration: 1500,
+                        style: {
+                          background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        }
+                      }).showToast();
             
       })
   });
   } 
-  renderCards(arrayProductos)
+  renderCards() 
 
 let alertaForm = document.getElementById("alerta-form")
 let alertaInput = document.getElementById("alerta-input")
 
 alertaForm.addEventListener("submit", (e)=> {
-    e.preventDefault();
-    const prodBuscado = arrayProductos.find((producto) => producto.producto === alertaInput.value)
-    alertaForm.focus() 
-
-    contenedorProductos.textContent = ""   
-    renderCards(alertaInput.value ==="" ? arrayProductos : [prodBuscado])
+  e.preventDefault();
+  console.log('alertaInput.value',alertaInput.value);
+  const prodBuscado = arrayProductos.find((producto) => producto.name.toUpperCase().includes(alertaInput.value.toUpperCase()))
+  alertaForm.focus() 
+  contenedorProductos.textContent = ""   
+  renderCards(alertaInput.value === "" ? arrayProductos : [prodBuscado])
 })
 
 const darkMode = document.getElementById("color-mode")
@@ -147,43 +132,70 @@ const body = document.body
 
 const CONTENEDOR_CARRITO = document.getElementById("contenedorCarrito")
 const VER_CARRITO = document.getElementById("verCarrito")
-
-
+const VACIAR_CARRITO = document.getElementById("vaciarCarrito")
 VER_CARRITO.addEventListener("click", ()=> {
   mostrarCarrito()
-
 })
 const mostrarCarrito = ()=> {
     CONTENEDOR_CARRITO.innerHTML = " "
     carrito.forEach(producto => {
+      console.log('producto',producto);
       let divComida = document.createElement("div")
       divComida.classList.add("col-xl-3", "col-md-6", "col-sm-12")
       divComida.innerHTML = `
                                   <div class="card" ;">
-                                  <img src="${producto.img}"  alt="..." class="imgProducto">
+                                  <img src="${producto.image_url}"  alt="..." class="imgProducto">
                                   <div class="card-body">
-                                  <h5 class="card-title">${producto.producto.toUpperCase()}</h5>
-                                  <p class="card-text">$${producto.precio}.</p>                         
-                                  <a href="#" class="btn btn-primary" id="eliminar-${producto.producto}">ELIMINAR PRODUCTO<a>                         
+                                  <h5 class="card-title">${producto.name.toUpperCase()}</h5>
+                                  <p class="card-text">$${producto.price}.</p>                         
+                                  <button class="btn btn-primary" id="eliminar-${producto.id}">ELIMINAR PRODUCTO</button>                         
                                   </div>                         
                               </div>`
                   
       CONTENEDOR_CARRITO.appendChild(divComida)
       
-      const button = document.getElementById(`eliminar-${producto.producto}`)
+      const button = document.getElementById(`eliminar-${producto.id}`)
       button.addEventListener("click", ()=> {
         
         CONTENEDOR_CARRITO.removeChild(divComida)
         
-        const productoSeleccionado = carrito.find(prod => prod.producto === producto.producto)
+        const productoSeleccionado = carrito.find(prod => prod.id === producto.id)
         const indice = carrito.indexOf(productoSeleccionado)
         
         carrito.splice(indice, 1)
-        localStorage.setItem(JSON.stringify("carrito", carrito))
+        localStorage.setItem("carrito", JSON.stringify(carrito))
         console.log(carrito);
+        Toastify({
+          text: "Producto Eliminado",
+          className: "info eliminado",
+          duration: 1500,
+          style: {
+            background: "linear-gradient(to right, #1111, #990000)",
+          }
+        }).showToast();
       })
 })
-}  
-
-
+}   
+    //AL borrar el carrito por completo se vacia todo lo que esta adentro, incluso el "ver carrito" y "vaciar carrito"
+VACIAR_CARRITO.addEventListener("click", ()=> {
+  Swal.fire({
+    title: 'Estas seguro?',
+    text: `Tenes ${carrito.length} productos`,
+    icon: 'warning',
+    showCancelButton: 'Cancelar',
+    confirmButtonText: 'Aceptar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      CONTENEDOR_CARRITO.innerHTML = " "
+      localStorage.setItem("carrito", JSON.stringify([]))
+      carrito = []
+      Swal.fire({
+        text: 'Se han eliminado los productos',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+        
+      })
+    }
+  })
+})
 

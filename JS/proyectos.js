@@ -287,7 +287,7 @@ divHeader.appendChild(EVENTOS)  */
     alert (`Esta es la tercer manera`)
 } */
 
-const CAJA = document.querySelector("#btn")
+/* const CAJA = document.querySelector("#btn")
 CAJA.onmousedown = ()=> {
     console.log(`esta pasando el mouse sobre la caja`); 
 } 
@@ -316,87 +316,9 @@ class Cliente{
         this.nombre = nombre
         this.apellido = apellido
     }
-}
+} */
 
-const ARRAY_CLIENTES = []
-
-const FORMULARIO = document.querySelector("#formulario")
-
-FORMULARIO.addEventListener("submit", (e)=> {
-e.preventDefault()
-    const NOMBRE = document.getElementById("nombre")
-    const APELLIDO = document.getElementById("apellido")
-
-    console.log(`El nombre ingresado es ${NOMBRE.value} 
-    y el apellido es ${APELLIDO.value}`); 
-
-    const cliente1 = new Cliente (NOMBRE.value, APELLIDO.value)
-
-    ARRAY_CLIENTES.push (cliente1)
-
-    FORMULARIO.reset()
-
-    console.log(ARRAY_CLIENTES);
-})
-
-// CLASE 11 ------------------- STORAGE & JASON ------------------------------
-
-// LocalStorage ==> los datos se van a almacenar de manera indefinida
-
-/* SessionStorage ==> los datos se almacenan de forma temporal. 
-Una vez que se cierra la pantalla se pierden los datos. Los datos van a 
-estar disponibles mientras dura le sesion */
-
-//setItem ==> es un metodo que proporciona el objeto local storage.
-//De esta manera almacenamos los datos de manera local
-
-localStorage.setItem("saludo", "Hola chicos!")
-
-localStorage.setItem("Despedida", "Chau chicos")
-
-//getItems ==> Es un metodo por el cual recuperamos valores almacenados en el local navegador   
-
-let valor = localStorage.getItem("saludo")
-console.log(valor);
-
-localStorage.setItem("Numero", 123);
-let numero = localStorage.getItem("Numero")
-
-console.log(typeof "numero");
-
-let numeroComoNumero = parseInt(numero)
-console.log(typeof numeroComoNumero);
-
-//SessionStorage funciona similar a localStorage
-
-/* sessionStorage.setItem ("nombre", "Tomas") */
-
-
-//removeItem ==> Metodo que nos permite eliminar un elemento
-
-localStorage.setItem("eliminar", "frase a eliminar")
-localStorage.removeItem("eliminar")
-
-//clear() ==> limina de manera global todos los datos almacenados
-/* localStorage.clear() */
-
-//Recorremos el localStorage
-
-localStorage.setItem("nombre", "juan")
-localStorage.setItem("edad", "25")
-localStorage.setItem("ciudad", "mar del plata")
-
-//Obtener todas las claves almacenadas en el localStorage
-
-let todasLasClaves = Object.keys(localStorage)
-
-for(let i = 0; i < todasLasClaves.length; i++){
-    let clave = todasLasClaves[i]
-    let valor = localStorage.getItem(clave)
-
-    console.log(clave, valor);
-
-}
+/* a */
 
 
 //****************************JSON***************************************
@@ -435,7 +357,7 @@ BOTON_MODO.addEventListener("click", ()=> {
 
 // GENERANDO UN CARRITO DE COMPRAS
 
-class Producto {
+/* class Producto {
     constructor (nombre, precio){
     this.nombre = nombre 
     this.precio = precio
@@ -469,7 +391,7 @@ carritoObjeto.forEach(producto => {
     contenedorCarrito.innerHTML += `
     <p>${producto.nombre} - ${producto.precio}</p>`
     
-});
+}); */
 
 // Pre-entrega II -------------------------------------------------
 
@@ -539,9 +461,10 @@ class Cliente{
         /* alert (`Por un total de ${carrito.reduce((acumulador, precio) =>acumulador + precio.precio, 0)}`) *///* no me sale el reduce() */
         /*   console.log(carrito); */
        /*  alert (`Vuelva prontos`)  */
-  /*       }      
+/*       }      
             
     } */
 
 /* const CLIENTE1 = new Cliente (prompt(`ingrese nombre`), prompt(`ingrese direccion`)) */
 /* CLIENTE1.ingresar()   */
+
